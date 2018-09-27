@@ -1,0 +1,15 @@
+article.hentry
+	- if @item[:title]
+		h1.entry-title: a rel="bookmark" href=relative_path_to(@item) = @item[:title]
+
+	- if !@item[:title] || @full
+		section.entry-content == @item.compiled_content(rep: :feed)
+
+	footer
+		- if @item[:title]
+			time.published datetime=@item[:date].iso8601
+				= @item[:date].strftime("%Y-%j")
+		- else
+			a rel="bookmark" href=relative_path_to(@item)
+				time.published datetime=@item[:date].iso8601
+					= @item[:date].strftime("%Y-%j")

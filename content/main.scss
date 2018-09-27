@@ -1,0 +1,93 @@
+@import "base.css";
+
+body {
+	padding: 5%;
+	background-color: #000;
+	background-color: rgba(#000, 0.8);
+	color: #ccc;
+	position: relative;
+}
+
+body > * {
+	float: left;
+	clear: left;
+	width: calc(100% - 17em);
+}
+
+body > nav {
+	float: none;
+	clear: none;
+	width: 15em;
+	margin-left: calc(100% - 15em);
+
+	ol {
+		padding: 0;
+		list-style: disc inside;
+	}
+
+	.copyright a {
+		margin: auto;
+	}
+}
+
+@media(max-width: 51em) {
+	body > * {
+		float: none;
+		width: auto;
+	}
+
+	body > nav {
+		width: auto;
+		margin-left: 0;
+		border-top: 1px dotted #ccc;
+		padding-top: 1em;
+	}
+}
+
+body > footer {
+	float: none;
+	clear: both;
+	margin-top: 2em;
+	font-size: 0.7em;
+	text-align: right;
+	width: 100%;
+}
+
+body > div:last-of-type {
+	display: none;
+}
+
+ol.entries {
+	padding: 0;
+	list-style-type: none;
+
+	.hentry {
+		margin-bottom: 1em;
+
+		> .author {
+			display: none;
+		}
+
+		> .entry-content {
+			display: inline;
+		}
+	}
+
+	&:not(.articles) .hentry {
+		> .entry-title {
+			display: inline;
+			font-weight: normal;
+			font-size: 1em;
+		}
+
+		> .entry-content p {
+			display: inline;
+		}
+
+		> footer {
+			display: inline-block;
+			font-size: 0.7em;
+			margin-left: 2em;
+		}
+	}
+}

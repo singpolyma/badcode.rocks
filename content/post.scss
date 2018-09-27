@@ -1,0 +1,77 @@
+body {
+	padding: 5%;
+	background-color: #000;
+	background-color: rgba(#000, 0.8);
+	color: #ccc;
+	max-width: 960px;
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+}
+
+article {
+	> .author {
+		overflow: hidden;
+
+		img {
+			max-height: 4em;
+			float: left;
+			margin-right: 2em;
+		}
+
+		.nickname {
+			font-size: 2em;
+			font-weight: bold;
+		}
+	}
+
+	> footer {
+		a[rel~=bookmark] {
+			display: block;
+			float: right;
+			margin-bottom: 1em;
+		}
+
+		nav {
+			margin-top: 1em;
+			margin-bottom: 1em; // space below for CC logo
+
+			h1 {
+				display: inline;
+				font-weight: normal;
+				font-size: 1em;
+			}
+
+			ul {
+				display: inline;
+				padding: 0;
+			}
+
+			li {
+				display: inline;
+				padding: 0;
+			}
+
+			a[rel~=tag] {
+				display: inline-block;
+
+				&:before {
+					content: " #";
+					display: inline-block;
+					color: #ccc;
+					text-decoration: none;
+				}
+			}
+		}
+
+		a[rel~=license] {
+			float: right;
+			clear: both;
+		}
+
+		a[rel~=conversation] {
+			display: block;
+			margin-top: 1em;
+		}
+	}
+}

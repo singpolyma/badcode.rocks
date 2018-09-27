@@ -1,0 +1,90 @@
+preprocess do
+	items.find_all("/articles/*/index.*").each do |article|
+		article[:date] = Date.strptime(article.identifier.components[1], "%Y%j")
+		article[:title] = article.identifier.components[1].split(/ /)[1..-1].join(" ")
+	end
+
+	by_year(:articles).keys.each do |year|
+		@items.create(
+			'',
+			{
+				title: "Archive for #{year}",
+				posts: :articles,
+				key: :by_year,
+				value: year,
+			},
+			"/#{year}.html"
+		)
+	end
+end
+
+compile '/articles/**/*.md' do
+	filter :erubis
+	filter :kramdown, auto_ids: false
+	layout '/post.*'
+	filter :clean_indents
+end
+
+compile '/{notes,articles}/**/*.md', rep: :feed do
+	filter :erubis
+	filter :kramdown, auto_ids: false
+	filter :absolutize
+end
+
+compile /\/(?:\d{4}.html)/ do
+	layout '/archive.*'
+	layout '/default.*'
+	filter :clean_indents
+end
+
+compile '/**/*.slim' do
+	filter :slim, pretty: true, indent: "\t"
+	layout '/default.*'
+	filter :clean_indents
+end
+
+compile '/**/*.atom' do
+	layout '/atom.*'
+	filter :clean_indents
+end
+
+compile '/**/*.md' do
+	filter :kramdown, auto_ids: false
+	layout '/default.*'
+	filter :clean_indents
+end
+
+compile '/**/*.html' do
+	layout '/default.*' unless @item[:layout] == false
+	filter :clean_indents
+end
+
+compile '/**/*.scss' do
+	filter :sass, syntax: :scss, style: :expanded
+	filter :clean_indents
+end
+
+compile '/**/*' do
+end
+
+route '/articles/**/*' do
+	"/#{item[:date].strftime("%Y/%j")}/#{item[:title].to_slug.normalize.split(/-/)[0..4].join("-")}/index.html"
+end
+
+route '/**/*.{slim,html,md}' do
+	if item.identifier =~ '/index.*'
+		'/index.html'
+	else
+		item.identifier.without_ext + '/index.html'
+	end
+end
+
+route '/**/*.scss' do
+	item.identifier.without_ext + '.css'
+end
+
+route '/**/*' do
+	item.identifier.to_s
+end
+
+layout '/**/*.slim', :slim, pretty: true, indent: "\t"

@@ -1,0 +1,22 @@
+doctype xml
+feed xmlns="http://www.w3.org/2005/Atom" xmlns:thr="http://purl.org/syndication/thread/1.0" xmlns:activity="http://activitystrea.ms/spec/1.0/" xmlns:poco="http://portablecontacts.net/spec/1.0" xmlns:media="http://purl.org/syndication/atommedia"
+	id dweb:/ipns/badcode.rocks/index.atom
+	title = @item[:title]
+	link rel="alternate" type="text/html" href="https://badcode.rocks/"
+	link rel="self" type="application/atom+xml" href="https://badcode.rocks#{@item.path}"
+	link rel="hub" href="https://websub.ipfs.singpolyma.net/"
+	updated = Time.now.iso8601
+	rights http://creativecommons.org/licenses/by-sa/4.0/
+
+	- send(@item[:posts])[0..25].each do |post|
+		entry
+			id = "dweb:/ipns/badcode.rocks#{post.path}"
+			title = post[:title].to_s
+			published = post[:date].iso8601
+			updated = post[:date].iso8601
+			activity:object-type = "http://activitystrea.ms/schema/1.0/article"
+			activity:verb = "http://activitystrea.ms/schema/1.0/post"
+			content type="xhtml" xml:base="https://badcode.rocks#{post.path}"
+				div xmlns="http://www.w3.org/1999/xhtml"
+					== post.compiled_content(rep: :feed)
+			link rel="alternate" type="text/html" href="https://badcode.rocks#{post.path}"

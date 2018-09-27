@@ -1,0 +1,18 @@
+nav
+	section
+		h1 Archives by Date
+
+		ol
+			- posts = @item[:posts] || :articles
+			- by_year(posts).keys.each do |year|
+				li: a href=relative_path_to(@items["/#{year}.html"]) #{year}
+
+	p
+		' Send submissions to:
+		a href="mailto:submissions@badcode.rocks" submissions@badcode.rocks
+
+	p.copyright: small
+		' This content is under a
+		a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" Creative Commons Attribution ShareAlike 4.0 License
+
+footer

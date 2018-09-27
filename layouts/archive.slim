@@ -1,0 +1,12 @@
+header
+	h1: a href=relative_path_to(@items["/index.slim"]) BadCode.rocks
+
+section
+	h1 = @item[:title]
+
+	ol.entries class="#{@item[:key]} #{@item[:posts]}"
+		- send(@item[:key], @item[:posts])[@item[:value]].each do |post|
+			li
+				== render "/feed_item.slim", item: post
+
+== render "/sidebar_and_footer.slim"

@@ -1,0 +1,28 @@
+doctype html
+html
+	head
+		meta charset="utf-8"
+		title = @item[:title] || excerptize(strip_html(@item.compiled_content))
+		meta name="viewport" content="width=device-width, initial-scale=1"
+		link rel="stylesheet" type="text/css" href=relative_path_to(@items["/article.scss"])
+
+	body
+		header
+			h1: a href=relative_path_to(@items["/index.slim"]) BadCode.rocks
+
+		article.hentry
+			- if @item[:title]
+				h1.entry-title = @item[:title]
+
+			section.entry-content
+				== item.compiled_content
+
+			footer
+				a rel="bookmark" href="./"
+					time.published datetime=@item[:date].iso8601
+						= @item[:date].strftime("%Y-%j")
+
+				p.copyright
+					small
+						' This content is under a
+						a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/" Creative Commons Attribution ShareAlike 4.0 License
