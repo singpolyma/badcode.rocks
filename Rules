@@ -25,7 +25,7 @@ compile '/articles/**/*.md' do
 	filter :clean_indents
 end
 
-compile '/{notes,articles}/**/*.md', rep: :feed do
+compile '/articles/**/*.md', rep: :feed do
 	filter :erubis
 	filter :kramdown, auto_ids: false
 	filter :absolutize
@@ -33,12 +33,14 @@ end
 
 compile /\/(?:\d{4}.html)/ do
 	layout '/archive.*'
+	filter :relativize_paths, type: :html
 	layout '/default.*'
 	filter :clean_indents
 end
 
 compile '/**/*.slim' do
 	filter :slim, pretty: true, indent: "\t"
+	filter :relativize_paths, type: :html
 	layout '/default.*'
 	filter :clean_indents
 end
@@ -68,7 +70,9 @@ compile '/**/*' do
 end
 
 route '/articles/**/*' do
-	"/#{item[:date].strftime("%Y/%j")}/#{item[:title].to_slug.normalize.split(/-/)[0..4].join("-")}/index.html"
+	path = item.identifier.components[1..-1]
+	article = path.last.start_with?("index.") ? item : @items["/articles/#{path[0]}/index.*"]
+	"/#{article[:date].strftime("%Y/%j")}/#{article[:title].to_slug.normalize.split(/-/)[0..4].join("-")}/#{path.last.sub(/index\..*/, "index.html")}"
 end
 
 route '/**/*.{slim,html,md}' do
