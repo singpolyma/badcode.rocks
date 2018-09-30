@@ -8,8 +8,11 @@ fi
 PROGRAM="$1"
 
 assert_run() {
+	OUTPUT="$("$PROGRAM" "$1")"
 	if [ "$2" != "$("$PROGRAM" "$1")" ]; then
-		echo "$1 != $2" 1>&2
+		echo "$PROGRAM '$1'" 1>&2
+		echo "expected: $2" 1>&2
+		echo "got: $OUTPUT" 1>&2
 		exit 1
 	fi
 }

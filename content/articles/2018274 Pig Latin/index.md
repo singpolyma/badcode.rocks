@@ -1,5 +1,3 @@
-# Pig Latin
-
 Implement, in the worst way possible, a program that translates from English to Pig Latin.
 
 Pig Latin is a made-up children's language that's intended to be
@@ -31,7 +29,7 @@ All submissions must contain a statement that the code is your own work (groups 
 
 If relevant, please make it clear what name, pseudonym, or group name you would like your submission attributed to.  This name (and the code content of your submission) will be made public.
 
-Submissions are due by INSERT DATE and the winning teardown post will be published the following month.
+Submissions are due by <time datetime="2018-10-31">2018-304 (October 31, 2018)</time> and the winning teardown post will be published the following month.
 
 ---
 
