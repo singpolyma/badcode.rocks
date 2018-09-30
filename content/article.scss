@@ -10,4 +10,8 @@ article .entry-content {
 		padding-left: 5%;
 		padding-bottom: 5%;
 	}
+
+	> p:first-child {
+		margin-top: 0;
+	}
 }
