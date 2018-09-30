@@ -62,6 +62,7 @@ compile '/**/*.html' do
 end
 
 compile '/**/*.scss' do
+	filter :erubis
 	filter :sass, syntax: :scss, style: :expanded
 	filter :clean_indents
 end

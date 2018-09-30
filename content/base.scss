@@ -27,7 +27,7 @@ img {
 
 a[rel~=license] {
 	display: block;
-	background: url("https://i.creativecommons.org/l/by-sa/4.0/88x31.png") no-repeat;
+	background: url("<%= relative_path_to(@items["/by-sa.png"]) %>") no-repeat;
 	text-indent: -99999999px;
 	height: 31px;
 	width: 88px;
