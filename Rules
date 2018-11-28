@@ -21,6 +21,7 @@ end
 compile '/articles/**/*.md' do
 	filter :erubis
 	filter :kramdown, auto_ids: false
+	filter :relativize_paths, type: :html
 	layout '/post.*'
 	filter :clean_indents
 end
