@@ -46,7 +46,7 @@ and:
 
 	if (isvowelay(S[0], S[1]))
 
-To make things even more confusing, in this submission since the custom boolean constants are actually strings, but normal C comparisons such as `S == 'x'` do not return those strings, there are two sets of conceptual booleans at play in these lines.  Even worse, later in the program there is a procedure that returns either `1` for "true" or `-1` for "false", requiring a programmer reading this code to understand three different ways of encoding the same information.
+To make things even more confusing, normal C comparisons such as `S == 'x'` do not return the custom strings-as-booleans values, so there are two sets of conceptual booleans at play in these lines.  Even worse, later in the program there is a procedure that returns either `1` for "true" or `-1` for "false", requiring a programmer reading this code to understand three different ways of encoding the same information.
 </section>
 
 <section markdown="1">
@@ -130,7 +130,7 @@ This code is so bad that even in a submission to a bad code contest, it has a co
 
 Besides the bad names, `KITTEN` is nonsense and is only ever used like `KITTEN(, x)` with no first argument at all.  If you did pass a first argument, the result would be a syntax error.
 
-The author has gotten distracted by the idea of a certain pattern—`isa`, `ise`, etc procedures for case-insensitive checking—and turned to macros to make generating them easier without stopping to think what the actual problem they are solving requires.  Are they solving the problem of needing an `isa` procedure?  Or are they rather solving the problem of needing a way to case-insensitively check for character equality.
+The author has gotten distracted by the idea of a certain pattern—`isa`, `ise`, etc procedures for case-insensitive checking—and turned to macros to make generating them easier without stopping to think what the actual problem they are solving requires.  Are they solving the problem of needing an `isa` procedure?  Or are they rather solving the problem of needing a way to case-insensitively check for character equality, like so:
 
 	int ischar_ci(char x, char y) {
 		return tolower(x) == tolower(y);
@@ -215,7 +215,7 @@ This is just the most devious of the many unchecked assumptions throughout the p
 
 This is the true pride and glory of this submission.  Having not read the tests before beginning, the author was faced with a solution that passed all but the last test.  Rather than go back and design a solution that fits into the program, they thought of the cleverest way they could add the functionality for the new requirement as quickly as possible, so as to be done.  This is the most real-world tech debt you will ever encounter.  New requirement at the eleventh hour results in quick trip to the cleverness stores.
 
-This code checks if the first argument is a phrase using the aptly named `people_gave_one_argument_with_the_words_rather_than_giving_them_as_separate_arguments` and then proceeds to shell out to run another copy of this same program, but with the words in the phrase each as a separate argument, essentially using the invocation semantics as a split-on-words parser.o
+This code checks if the first argument is a phrase using the aptly named `people_gave_one_argument_with_the_words_rather_than_giving_them_as_separate_arguments` and then proceeds to shell out to run another copy of this same program, but with the words in the phrase each as a separate argument, essentially using the invocation semantics as a split-on-words parser.
 
 This is another place the code becomes gratuitously non-portable, choosing to use the POSIX-only `popen` instead of the C-standard `system` library call.  Using `popen` actually complicates the code, resulting in a quickly-written loop to read all output from the subprocess and output it again, rather than simply allowing the subprocess to inherit `STDOUT`.
 </section>
@@ -223,18 +223,27 @@ This is another place the code becomes gratuitously non-portable, choosing to us
 <section markdown="1">
 # Fun bits not worth writing paragraphs about
 
+<section markdown="1">
+# Terrible names
+
 	indexer_for_the_word_thingies
 	thingimajigie
 	load_me_the_thingie_withie
 	dologic
 	people_gave_one_argument_with_the_words_rather_than_giving_them_as_separate_arguments
+</section>
 
+<section markdown="1">
+# Comments that should have been removed
 
 	/* REMOVE: USE LIKE: S = isvowelay(string[0], string[1]); strcmp(S, "true");  */
 	/* printf("c.i: %d; c.j: %d\n", c.i, c.j); */
 	// printf("command: %s\n", command);
 	/* printf("%s %s %s\n", *word_thingies[i].start, isvowelay((*word_thingies[i].start)[0], (*word_thingies[i].start)[1]), word_thingies[i].end); */
+</section>
 
+<section markdown="1">
+# Incomprehensible on its own
 
 	a.i = c.j;
 	a.j = strlen(S)-c.j;
@@ -244,5 +253,12 @@ This is another place the code becomes gratuitously non-portable, choosing to us
 
 	d.i = 0;
 	d.j = 3;
+</section>
 
+</section>
+
+<section markdown="1">
+# Conclusion
+
+That's the highlights from October.  Think you can do worse?  Submissions for November are still open, and a December challenge will be going up soon!
 </section>
