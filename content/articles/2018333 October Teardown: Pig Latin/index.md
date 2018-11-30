@@ -190,7 +190,7 @@ This is what comes of taking performance advice without understanding *why*.  Or
 
 `strncpy` is one of those really dangerous library calls masquerading as a "safer one".  If the source string is longer than the given size, the result is not null-terminated, and thus is not a valid C string and all kinds of bad things are likely to happen.  This helper neither checks the length, nor forces a null termination manually.  It's an accident waiting to happen.
 
-This is just the most devious of the many unchecked assumptions throughout the program, including: that there will be no more than 256 words passed in, that all the globals are initialized before any procedure is called, and that no word contains characters that might be interesting to a shell.
+This is just the most devious of the many unchecked assumptions throughout the program, including: that there will be no more than 256 words passed in, that all the globals are set up before any procedure is called, and that no word contains characters that might be interesting to a shell.
 </section>
 
 <section markdown="1">
