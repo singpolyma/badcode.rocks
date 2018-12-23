@@ -60,7 +60,7 @@ Using a made-up-on-the-spot initialism is usually a bad naming practise, but in 
 	...
 	#if __INCLUDE_LEVEL__ != BEER_MAX
 
-`__INCLUDE_LEVEL__` is a magic macro the C Preprocessor exposes to indicate how many `#include` directives the compiler is in the midst of processing to get to this point.  So if file A includes file B includes file C, then in A the macro expands to `0`, in B to `1`, and in C to `2`.
+`__INCLUDE_LEVEL__` is not a standard part of the CPP language, but rather a language extension.  It will exist under many preprocessors, but not all.  When defined, it is a magic macro C Preprocessor exposes to indicate how many `#include` directives the preprocessor is in the midst of processing to get to this point.  So if file A includes file B includes file C, then in A the macro expands to `0`, in B to `1`, and in C to `2`.
 
 This code assumes throughout that `__INCLUDE_LEVEL__` will be `1` when the file is first included.  While this is true in the context of the given program, it means that if the file were ever to be included from another context, it would simply not produce the expected code.  This usage also requires the reader to *know* that `__INCLUDE_LEVEL__` is being used as the verse number counter, instead of providing a nice alias at no cost:
 
@@ -74,7 +74,7 @@ The program make another assumption about the environment so egregious that the 
 	#undef NEXTFUNCNAME
 	#define NEXTFUNCNAME CBRMFP(beer, __COUNTER__)
 
-Always a good sign when you have code comments that say "Let's hope".  `__COUNTER__` here is assumed to always expand to a value one lower than `__INCLUDE_LEVEL__` which is *only* true if this is the *only* line in the whole of the source that uses it.
+Always a good sign when you have code comments that say "Let's hope".  `__COUNTER__` here is assumed to always expand to a value one lower than `__INCLUDE_LEVEL__` which is *only* true if this is the *only* line in the whole of the source that uses it.  And, of course, `__COUNTER__` is also not a standard part of CPP, but yet another language extension.
 </section>
 
 <section markdown="1">
