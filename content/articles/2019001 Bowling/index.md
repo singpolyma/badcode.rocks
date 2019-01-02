@@ -60,7 +60,7 @@ Your program must either exit success and print the final score on STDOUT, or el
 
 * `1`: One roll knocked down more pins than were standing
 * `2`: More rolls were provided than would be present in a complete game
-* `3`: Fewer rolls were provided tahn would be present in a complete game
+* `3`: Fewer rolls were provided than would be present in a complete game
 
 # Submission
 
