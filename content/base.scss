@@ -32,3 +32,27 @@ a[rel~=license] {
 	height: 31px;
 	width: 88px;
 }
+
+table {
+	border-collapse: collapse;
+
+	th {
+		text-align: left;
+		padding-left: 0.5em;
+		padding-right: 0.5em;
+	}
+
+	td {
+		border: 1px solid #ccc;
+		border-bottom: 0 solid transparent;
+		padding: 0.5em;
+
+		&:first-of-type {
+			border-left: 0 solid transparent;
+		}
+
+		&:last-of-type {
+			border-right: 0 solid transparent;
+		}
+	}
+}
