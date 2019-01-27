@@ -48,6 +48,14 @@ It is also highly debatable whether placing the main (and here, only) return val
     .exec("cd scripts ;bash ../scripts/translate.bash " + RobotDirectionFace + " && echo $?".split('&').join('|')
 
 Oh, there is also some SQL present in this submission.  It is never used, but present twice in duplicate.  Just to have another technology at least present.
+
+This submission feels like a small-size replica of what happens with sprawling legacy codebases.  No one wants to understand or edit what already exists, and only new code (in whatever the "current" stack is) gets added.  Instead of understanding or replacing the Forth, wrap it in shell!  Right down to exaggerations like the one above:
+
+    "&& echo $?".split('&').join('|')
+
+instead of:
+
+    "|| echo $?"
 </section>
 
 <section markdown="1">
@@ -136,7 +144,7 @@ Most programmers have, at one time or another, been guilty of using their editor
 <section markdown="1">
 # How to turn a robot
 
-So N/S/E/W becomes 10/20/30/40... why?  There are two parts to this answer... both are different kinds of clever, but always the kind of clever that just makse things worse.
+So N/S/E/W becomes 10/20/30/40... why?  There are two parts to this answer... both are different kinds of clever, but always the kind of clever that just makes things worse.
 
 The robot can turn left or right, but there only needs to be an implementation for right because helpfully:
 
