@@ -138,7 +138,7 @@ This rewrite also allows us to re-use parts of the ecosystem and get rid of `mak
 	y <- make_num (y_string)
 	z <- return (x + y)
 
-The main body of the problem solution is full of variables named `x`, `y`, and `z` -- sometimes name shadowing earlier variable with the same terrible name, and not always even using the same letter for the same purpose!
+The main body of the problem solution is full of variables named `x`, `y`, and `z`; sometimes name shadowing an earlier variable with the same terrible name, and not always using the same letter for the same purpose!
 
 Haskellers sometimes get accused of this generally, but it usually comes from writing a function that is so generic that nothing useful is known about the contents of the variable, such as:
 
