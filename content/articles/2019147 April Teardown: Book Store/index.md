@@ -46,7 +46,7 @@ Within the 7-character limit these can be named more helpfully:
     NGROUPS =  0
     SP      =  1
 
-The `I` prefix that was on many of these is not only traditional, but also meaningful in Fortran 77 to indicate that the type should be inferred to be `INTEGER` if not specified otherwise.  However, explicitly declaring the variables is not only possible, but preferred, and neither tradition nor laziness is a great excuse for sticking to this bad kind of naming.  *Especially* when identifier length is at a premium one cannot be wasting an entire character.
+The `I` prefix that was on many of these is not only traditional, but also meaningful in Fortran 77 to indicate that the type should be inferred to be `INTEGER` if not specified otherwise.  However, explicitly declaring the variables (using `INTEGER SP`, etc) is not only possible, but preferred, and neither tradition nor laziness is a great excuse for sticking to this bad kind of naming.  *Especially* when identifier length is at a premium one cannot be wasting an entire character.
 </section>
 
 <section markdown="1">
@@ -54,7 +54,7 @@ The `I` prefix that was on many of these is not only traditional, but also meani
 
 From reading this code, you would be forgiven for thinking that Fortran 77 lacked any kind of named procedures.  However, despite everything in this program being done using a GOTO or repetitive inlined code, even Fortran 66 had both `SUBROUTINE` and `FUNCTION` facilities.  Using this for even something as simple as the inline stack manipulation can make it much clearer what is going on:
 
-    - STACK(IP1:IP1+4) = (/1, I, J, NGROUPS, IP2 /)
+    - IBSKT(IP1:IP1+4) = (/1, I, J, NGROUPS, IP2 /)
     - IP2 = IP1
     - IP1 = IP1 + 5
     + CALL PUSH(1)
@@ -63,7 +63,7 @@ From reading this code, you would be forgiven for thinking that Fortran 77 lacke
     + CALL PUSH(NGROUPS)
     ...
     - IF (IP2<0) THEN
-    + IF (SP<5) THEN
+    + IF (IP1<5) THEN
         GOTO 50
       ELSE
     - ICMFRM  = STACK(IP2)
@@ -104,11 +104,11 @@ The code labelled `11` then jumps back to this code, but full analysis of the al
 
          JJ = 0
          DO II=1,5
-           JJ = JJ + BASKET(II)
+           JJ = JJ + IBSKT(II)
          END DO
 
          IF (JJ == 0) THEN
-    C      Code to run when BASKET is empty, no longer needs to GOTO 40
+    C      Code to run when basket is empty, no longer needs to GOTO 40
          ELSE
     C      Code previously labelled 11, no longer needs a label
          END IF
